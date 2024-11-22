@@ -4,7 +4,7 @@
 DO NOT use this code in production environments.
 
 ## Purpose
-These files demonstrate the types of vulnerabilities that CodeGuardian can detect.
+These files demonstrate the types of vulnerabilities that Vuln-Analyst can detect.
 They are provided for:
 - Testing the scanner
 - Educational purposes
