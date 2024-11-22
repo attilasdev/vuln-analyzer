@@ -1,0 +1,72 @@
+rules:
+  # Authentication & Authorization
+  - id: "WEAK_PASSWORD_VALIDATION"
+    name: "Weak Password Validation"
+    pattern: '(?i)password.{0,20}(length\s*[<=>]\s*[0-8]|.{0,10}[!=]=\s*[''"][^''"]{1,7}[''"])'
+    description: "Password validation may be too weak"
+    severity: "HIGH"
+    category: "AUTH"
+    languages: ["all"]
+
+  - id: "HARDCODED_CREDENTIALS"
+    name: "Hardcoded Credentials"
+    pattern: '(?i)(password|passwd|pwd|secret|key|token|api[_-]?key)\s*[:=]\s*[''"][^''"\s]{3,}[''"]'
+    description: "Hardcoded credentials detected"
+    severity: "HIGH"
+    category: "AUTH"
+    languages: ["all"]
+
+  # Injection Vulnerabilities
+  - id: "SQL_INJECTION"
+    name: "SQL Injection"
+    pattern: '(?i)(execute|query|select|insert|update|delete)\s*[\(`].*?(concat|\+|\|\|).*?[\$\@\#][a-zA-Z0-9_]+'
+    description: "Possible SQL injection vulnerability"
+    severity: "HIGH"
+    category: "INJECTION"
+    languages: ["php", "python", "java", "ruby"]
+
+  - id: "XSS_VULNERABILITY"
+    name: "Cross-site Scripting (XSS)"
+    pattern: '(?i)(innerHTML|outerHTML|document\.write|eval)\s*[\+\(`]|[^.](innerText|textContent)\s*='
+    description: "Possible XSS vulnerability"
+    severity: "HIGH"
+    category: "INJECTION"
+    languages: ["javascript", "typescript", "html"]
+
+  # Cryptographic Issues
+  - id: "WEAK_CRYPTO"
+    name: "Weak Cryptography"
+    pattern: '(?i)(md5|sha1|des|rc4|blowfish)[\s\(]'
+    description: "Usage of weak cryptographic algorithm"
+    severity: "HIGH"
+    category: "CRYPTO"
+    languages: ["all"]
+
+  # File Operations
+  - id: "PATH_TRAVERSAL"
+    name: "Path Traversal"
+    pattern: '(?i)(file|open|read|include|require)\s*\(.*?\.\.\/'
+    description: "Possible path traversal vulnerability"
+    severity: "HIGH"
+    category: "FILE_OPS"
+    languages: ["php", "python", "ruby", "javascript"]
+
+  # Command Injection
+  - id: "COMMAND_INJECTION"
+    name: "Command Injection"
+    pattern: '(?i)(system|exec|popen|spawn|shell_exec)\s*\(.*?\$'
+    description: "Possible command injection vulnerability"
+    severity: "HIGH"
+    category: "INJECTION"
+    languages: ["php", "python", "ruby"]
+
+  # Error Handling
+  - id: "ERROR_DISCLOSURE"
+    name: "Error Information Disclosure"
+    pattern: '(?i)(exception|error).*?(toString|getMessage)\s*\(|printStackTrace'
+    description: "Possible sensitive error information disclosure"
+    severity: "MEDIUM"
+    category: "ERROR"
+    languages: ["java", "javascript", "typescript"]
+
+  # Add more rules as needed...
